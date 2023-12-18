@@ -36,6 +36,4 @@ def get_app_name(launch_url):
         return steam_app_name(launch_url)
     else:
         print("Unknown Platform URL")
-        exit(-1)
-
-print(get_app_name("steam://rungameid/1118310"))
+        return None

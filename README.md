@@ -1,0 +1,2 @@
+# Sunshine Helper Scripts
+These scripts are designed to assist Sunshine, the gamestreaming host software, to properly manage the streaming session. Currently, the code handles proper termination of Steam games when telling sunshine to end the stream. More will be added as this project develops.
