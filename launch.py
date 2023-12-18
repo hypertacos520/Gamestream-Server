@@ -9,7 +9,8 @@ if __name__ == "__main__":
         exit(-1)
 
     # Get Game Name
-    game_name = platform_api.get_app_name(sys.argv[1])
+    # game_name = platform_api.get_app_name(sys.argv[1])
+    game_name = sys.argv[1]
 
     # Search for App PID
     pid = None
