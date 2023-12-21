@@ -1,4 +1,4 @@
-import psutil, os, signal, subprocess, platform, json, pyautogui
+import psutil, os, signal, subprocess, platform, json, pyautogui, time
 
 def get_pid_by_name(partial_name):
     words = partial_name.split()
@@ -20,17 +20,25 @@ def get_pid_by_name(partial_name):
 
 def terminate_process(pid):
     try:
-        os.kill(int(pid), signal.SIGTERM)  # Send the SIGTERM signal
+        # Send the SIGTERM signal
+        os.kill(int(pid), signal.SIGTERM)
         print(f"Process with PID {pid} terminated successfully.")
+        
+        # Check if the process is still alive after SIGTERM
+        time.sleep(1)  # Give some time for the process to respond to SIGTERM
+        try:
+            os.kill(int(pid), 0)  # Check if the process is still alive
+            print(f"Process with PID {pid} is still alive. Sending SIGKILL.")
+            os.kill(int(pid), signal.SIGKILL)  # Send the SIGKILL signal
+            print(f"Process with PID {pid} forcefully terminated.")
+        except ProcessLookupError:
+            print(f"Process with PID {pid} not found after SIGTERM.")
     except ProcessLookupError:
         print(f"Error: Process with PID {pid} not found.")
-        exit(-1)
     except PermissionError:
         print(f"Error: Permission denied to terminate process with PID {pid}.")
-        exit(-2)
     except:
         print(f"Error: Process {pid} failed to terminate. Unknown Error.")
-        exit(-3)
 
 def force_terminate_process():
     pyautogui.keyDown('alt')
