@@ -35,10 +35,13 @@ def terminate_process(pid):
             print(f"Process with PID {pid} not found after SIGTERM.")
     except ProcessLookupError:
         print(f"Error: Process with PID {pid} not found.")
+        exit(-1)
     except PermissionError:
         print(f"Error: Permission denied to terminate process with PID {pid}.")
+        exit(-2)
     except:
         print(f"Error: Process {pid} failed to terminate. Unknown Error.")
+        exit(-3)
 
 def force_terminate_process():
     pyautogui.keyDown('alt')
