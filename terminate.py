@@ -16,4 +16,5 @@ if __name__ == "__main__":
     if not pid == None:
         system.terminate_process(pid)
     else:
-        print(f"No process found with name: '{game_name}'")
+        print(f"No process found with name: '{game_name}'\nUsing fallback method")
+        system.force_terminate_process()

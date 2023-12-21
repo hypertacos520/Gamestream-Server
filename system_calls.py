@@ -1,4 +1,4 @@
-import psutil, os, signal, subprocess, platform, json
+import psutil, os, signal, subprocess, platform, json, pyautogui
 
 def get_pid_by_name(partial_name):
     words = partial_name.split()
@@ -31,6 +31,11 @@ def terminate_process(pid):
     except:
         print(f"Error: Process {pid} failed to terminate. Unknown Error.")
         exit(-3)
+
+def force_terminate_process():
+    pyautogui.keyDown('alt')
+    pyautogui.press('f4')
+    pyautogui.keyUp('alt')
 
 def save_data(data):
     # Get the directory of the script
