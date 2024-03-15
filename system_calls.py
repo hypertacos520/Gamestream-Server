@@ -1,4 +1,5 @@
-import psutil, os, signal, subprocess, platform, json, pyautogui, time
+import psutil, os, signal, subprocess, platform, json, time
+from pynput.keyboard import Key, Controller
 
 def get_pid_by_name(partial_name):
     words = partial_name.split()
@@ -44,9 +45,12 @@ def terminate_process(pid):
         exit(-3)
 
 def force_terminate_process():
-    pyautogui.keyDown('alt')
-    pyautogui.press('f4')
-    pyautogui.keyUp('alt')
+    keyboard = Controller()
+    
+    with keyboard.pressed(Key.alt):
+        # While holding Alt, press F4
+        keyboard.press(Key.f4)
+        keyboard.release(Key.f4)
 
 def save_data(data):
     # Get the directory of the script
